@@ -83,7 +83,7 @@ class AppMain:
                     if event.button == 1:
                         self.add_particle(event.pos, event.button)
                     elif event.button == 3:
-                        self.add_multiple_particles(event.pos, event.button, random.randint(1,5))
+                        self.add_multiple_particles(event.pos, event.button, num_particles=random.randint(1,5))
             if should_quit:
                 break
 
