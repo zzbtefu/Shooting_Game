@@ -29,14 +29,33 @@ class Particle:
 
 
 class AppMain:
-    def run(self):
+    def __init__(self):
         pygame.init()
         width, height = 600, 400
-        screen = pygame.display.set_mode((width, height))
-        clock = pygame.time.Clock()
+        self.screen = pygame.display.set_mode((width, height))
+        self.world = World(width, height, dt=1.0, gy=0.5)
+        self.particle_list = []
 
-        world = World(width, height, dt=1.0, gy=0.5)
-        particle_list = []
+    def update(self):
+        for p in self.particle_list:
+            p.update()
+        self.particle_list[:] = [p for p in self.particle_list if p.is_alive]
+
+    def draw(self):
+        self.screen.fill(pygame.Color("black"))
+        for p in self.particle_list:
+            p.draw(self.screen)
+        pygame.display.update()
+
+    def add_particle(self, pos, button):
+        if button == 1:
+            vx = random.uniform(-10, 10)
+            vy = random.uniform(-10, 0)
+            p = Particle(pos, (vx, vy), self.world)
+            self.particle_list.append(p)
+
+    def run(self):
+        clock = pygame.time.Clock()
 
         while True:
             frames_per_second = 60
@@ -50,23 +69,12 @@ class AppMain:
                     if event.key == pygame.K_ESCAPE:
                         should_quit = True
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        vx = random.uniform(-10, 10)
-                        vy = random.uniform(-10, 0)
-                        p = Particle(event.pos, (vx, vy), world)
-                        particle_list.append(p)
+                    self.add_particle(event.pos, event.button)
             if should_quit:
                 break
 
-            for p in particle_list:
-                p.update()
-
-            particle_list[:] = [p for p in particle_list if p.is_alive]
-
-            screen.fill(pygame.Color("black"))
-            for p in particle_list:
-                p.draw(screen)
-            pygame.display.update()
+            self.update()
+            self.draw()
 
         pygame.quit()
 
@@ -74,3 +82,4 @@ class AppMain:
 if __name__ == "__main__":
     app = AppMain()
     app.run()
+    
