@@ -10,11 +10,13 @@ class World:
         self.gy = gy
 
 class Particle:
-    def __init__(self, pos, vel, world):
+    def __init__(self, pos, vel, world, radius=10.0, color="green"):
         self.is_alive = True
         self.x, self.y = pos
         self.vx, self.vy = vel
         self.world = world
+        self.radius = radius
+        self.color = pygame.Color(color)
 
     def update(self):
         self.vy += self.world.gy * self.world.dt
@@ -24,8 +26,7 @@ class Particle:
             self.is_alive = False
 
     def draw(self, screen):
-        radius = 10
-        pygame.draw.circle(screen, pygame.Color("green"), (self.x, self.y), radius)
+        pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
 
 
 class AppMain:
