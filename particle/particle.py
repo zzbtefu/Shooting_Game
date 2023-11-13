@@ -21,6 +21,9 @@ class Particle:
         self.vy += self.world.gy * self.world.dt
         self.x += self.vx * self.world.dt
         self.y += self.vy * self.world.dt
+        self.update_after_move()
+        
+    def update_after_move(self):
         if self.x < 0 or self.x > self.world.width or self.y > self.world.height:
             self.is_alive = False
 
