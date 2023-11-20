@@ -50,3 +50,4 @@ class ConfinedParticle(Particle):
             self.vel.y *= -e
             # constrain particle on or above the floor
             self.pos.y = height - radius
+            
