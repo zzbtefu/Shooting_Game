@@ -29,7 +29,7 @@ class AppMain:
             p = particle.Particle(pos, (vx, vy), self.world, color="green")
         elif button == 3:
             p = particle.Particle(pos, (vx, vy), self.world, color="blue", \
-                                    postmove_strategy=particle.bounce_on_boundary)
+                                    postmove_strategy=particle.BounceOnBoundaryStrategy())
         else:
             return
         self.particle_list.append(p)
