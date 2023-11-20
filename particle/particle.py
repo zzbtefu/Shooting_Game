@@ -54,6 +54,8 @@ class Particle:
     def y(self):
         return self.pos.y
     
+    #ConfinedParticleは必要ないので消しておｋだけど、
+    #bounce_on_boundaryと見比べるために残しておきます
 class ConfinedParticle(Particle):
     def update_after_move(self):
         x, y = self.x, self.y
