@@ -23,15 +23,15 @@ class AppMain:
         pygame.display.update()
 
     def add_particle(self, pos, button):
-            vx = random.uniform(-10, 10)
-            vy = random.uniform(-10, 0)
-            if button == 1:
-                p = particle.Particle(pos, (vx, vy), self.world, color="green")
-            elif button == 3:
-                p = particle.ConfinedParticle(pos, (vx, vy), self.world, color="blue")
-            else:
-                return
-            self.particle_list.append(p)
+        vx = random.uniform(-10, 10)
+        vy = random.uniform(-10, 0)
+        if button == 1:
+            p = particle.Particle(pos, (vx, vy), self.world, color="green")
+        elif button == 3:
+            p = particle.ConfinedParticle(pos, (vx, vy), self.world, color="blue")
+        else:
+            return
+        self.particle_list.append(p)
 
     def run(self):
         clock = pygame.time.Clock()
